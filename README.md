@@ -1,1 +1,180 @@
-# Othhon
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programok</title>
+    <style>
+        body {
+            background-color: #000;
+            background-image: url('https://example.com/image1.jpg'), url('https://example.com/image2.jpg'), url('https://example.com/image3.jpg'), url('https://example.com/image4.jpg');
+            background-size: 50% 50%;
+            background-repeat: no-repeat;
+            background-position: top left, top right, bottom left, bottom right;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        .table-container {
+            width: 90%;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #000;
+            overflow-y: auto;
+            max-height: 400px; /* Set the maximum height for scrolling */
+            border: 1px solid black;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .monday {
+            background-color: #8B4513; /* Brown color */
+            color: white;
+        }
+        .tuesday, .thursday {
+            background-color: #FFC0CB; /* Pink color */
+            color: black;
+        }
+        .countdown {
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 15px;
+            color: #fff;
+            background-color: #333;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown" id="countdown"></div>
+    <div class="content">
+        <h1>Szabadban végezhető programok</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hét</th>
+                        <th>Hétfő</th>
+                        <th>Kedd</th>
+                        <th>Szerda</th>
+                        <th>Csütörtök</th>
+                        <th>Péntek</th>
+                        <th>Szombat</th>
+                        <th>Vasárnap</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td class="monday"></td>
+                        <td class="tuesday"></td>
+                        <td>program emlékeztető</td>
+                        <td class="thursday"></td>
+                        <td></td>
+                        <td>Kirándulás</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td class="monday"></td>
+                        <td class="tuesday"></td>
+                        <td></td>
+                        <td class="thursday"></td>
+                        <td></td>
+                        <td>Kertészkedés</td>
+                        <td></td>
+                    </tr>
+                    <!-- Add more rows here for outdoor programs -->
+                </tbody>
+            </table>
+        </div>
+
+        <h1>Bent végezhető programok</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hét</th>
+                        <th>Hétfő</th>
+                        <th>Kedd</th>
+                        <th>Szerda</th>
+                        <th>Csütörtök</th>
+                        <th>Péntek</th>
+                        <th>Szombat</th>
+                        <th>Vasárnap</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td class="monday"></td>
+                        <td class="tuesday"></td>
+                        <td>program emlékeztető</td>
+                        <td class="thursday"></td>
+                        <td></td>
+                        <td>Kulturális nap</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td class="monday"></td>
+                        <td class="tuesday"></td>
+                        <td></td>
+                        <td class="thursday"></td>
+                        <td></td>
+                        <td>Színház vagy koncert</td>
+                        <td></td>
+                    </tr>
+                    <!-- Add more rows here for indoor programs -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        function getNextSaturday() {
+            const now = new Date();
+            const nextSaturday = new Date();
+            nextSaturday.setDate(now.getDate() + (6 - now.getDay() + 7) % 7 + 1);
+            nextSaturday.setHours(0, 0, 0, 0);
+            return nextSaturday;
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const nextSaturday = getNextSaturday();
+            const timeDiff = nextSaturday - now;
+
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = 
+                days + " nap " + hours + " óra " + minutes + " perc " + seconds + " másodperc";
+
+            if (timeDiff < 0) {
+                document.getElementById("countdown").innerHTML = "Itt a szombat!";
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
